@@ -1,4 +1,10 @@
+
+from quiz_game import QuizGame
+
+
 def main():
+    game = QuizGame()
+
     while True:
         print("\n================================")
         print("       한국 역사 퀴즈 게임")
@@ -11,9 +17,8 @@ def main():
 
         choice = input("\n메뉴 번호를 입력하세요 (1~5): ").strip()
 
-if choice == "1":
-    print("테스트 성공! 1번 메뉴가 실행되었습니다.")
-    print("퀴즈 풀기 기능은 준비 중입니다.")
+        if choice == "1":
+            game.play()
         elif choice == "2":
             print("퀴즈 추가 기능은 준비 중입니다.")
         elif choice == "3":
