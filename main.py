@@ -1,5 +1,42 @@
 
 from quiz_game import QuizGame
+from quiz import Quiz
+
+
+def add_quiz(game):
+    print("\n===== 새로운 퀴즈 추가 =====")
+
+    question = input("문제를 입력하세요: ").strip()
+
+    if not question:
+        print("문제는 비워둘 수 없습니다.")
+        return
+
+    options = []
+
+    for number in range(1, 5):
+        option = input(f"{number}번 보기를 입력하세요: ").strip()
+
+        if not option:
+            print("보기는 비워둘 수 없습니다.")
+            return
+
+        options.append(option)
+
+    while True:
+        answer = input("정답 번호를 입력하세요 (1~4): ").strip()
+
+        if answer in ("1", "2", "3", "4"):
+            answer = int(answer)
+            break
+
+        print("정답 번호는 1~4 중에서 입력해 주세요.")
+
+    new_quiz = Quiz(question, options, answer)
+    game.quizzes.append(new_quiz)
+
+    print("\n새로운 퀴즈가 추가되었습니다!")
+    print(f"현재 등록된 문제 수: {len(game.quizzes)}개")
 
 
 def main():
@@ -21,7 +58,7 @@ def main():
             game.play()
 
         elif choice == "2":
-            print("퀴즈 추가 기능은 준비 중입니다.")
+            add_quiz(game)
 
         elif choice == "3":
             print("\n===== 한국 역사 퀴즈 목록 =====")
