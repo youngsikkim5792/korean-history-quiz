@@ -24,19 +24,21 @@ def add_quiz(game):
         options.append(option)
 
     while True:
-        answer = input("정답 번호를 입력하세요 (1~4): ").strip()
+        answer = input("정답 번호 (1~4): ").strip()
 
         if answer in ("1", "2", "3", "4"):
-            answer = int(answer)
             break
 
-        print("정답 번호는 1~4 중에서 입력해 주세요.")
+        print("1~4 중에서 입력해 주세요.")
 
-    new_quiz = Quiz(question, options, answer)
-    game.quizzes.append(new_quiz)
+    game.quizzes.append(Quiz(question, options, int(answer)))
 
-    print("\n새로운 퀴즈가 추가되었습니다!")
-    print(f"현재 등록된 문제 수: {len(game.quizzes)}개")
+    if game.save_state():
+        print("\n새로운 퀴즈가 저장되었습니다!")
+    else:
+        print("\n문제는 추가되었지만 저장에 실패했습니다.")
+
+    print(f"총 {len(game.quizzes)}개의 문제가 등록되어 있습니다.")
 
 
 def main():
@@ -69,7 +71,7 @@ def main():
             print(f"\n총 {len(game.quizzes)}개의 문제가 등록되어 있습니다.")
 
         elif choice == "4":
-            print("최고 점수 기능은 준비 중입니다.")
+            game.show_best_score()
 
         elif choice == "5":
             print("게임을 종료합니다. 감사합니다!")
